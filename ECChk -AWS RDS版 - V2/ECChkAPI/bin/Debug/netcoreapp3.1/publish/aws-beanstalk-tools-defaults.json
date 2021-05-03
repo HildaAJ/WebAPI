@@ -1,0 +1,25 @@
+
+{
+    "comment" : "This file is used to help set default values when using the dotnet CLI extension Amazon.ElasticBeanstalk.Tools. For more information run \"dotnet eb --help\" from the project root.",
+    "profile" : "ecchk_deploy",
+    "region"  : "us-east-1",
+    "application" : "ECChkAPI",
+    "environment" : "ECChkAPI-prod",
+    "cname"       : "ecchkapi-prod",
+    "solution-stack" : "64bit Amazon Linux 2 v2.1.1 running .NET Core",
+    "environment-type" : "SingleInstance",
+    "instance-profile" : "aws-elasticbeanstalk-ECChkAPI-prod",
+    "service-role"     : "aws-elasticbeanstalk-service-role",
+    "health-check-url" : "/",
+    "instance-type"    : "t3a.nano",
+    "key-pair"         : "MyPuttyKey",
+    "iis-website"      : "Default Web Site",
+    "app-path"         : "/",
+    "enable-xray"      : false,
+    "configuration"    : "Debug",
+    "framework"        : "netcoreapp3.1",
+    "self-contained"   : false,
+    "enhanced-health-type" : "basic",
+    "additional-options"   : "\"aws:autoscaling:launchconfiguration,SecurityGroups\"=\"sg-056f7d65af5ca6baa\";\"aws:ec2:vpc,Subnets\"=\"subnet-02669b5907efb8f95\"",
+    "proxy-server"         : "nginx"
+}

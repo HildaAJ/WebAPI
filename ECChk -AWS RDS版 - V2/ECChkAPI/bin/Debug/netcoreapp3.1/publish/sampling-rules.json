@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "rules": [
+    {
+      "description": "SECchk Get all data and get data via end three yard",
+      "host": "*",
+      "http_method": "*",
+      "url_path": "/api/SECChk/*",
+      "fixed_target": 0,
+      "rate": 0.05
+    }
+  ],
+  "default": {
+    "fixed_target": 1,
+    "rate": 0.1
+  }
+}

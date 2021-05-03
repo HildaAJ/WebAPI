@@ -1,0 +1,116 @@
+﻿@model ECListViewModel;
+
+<h1>EC取貨</h1>
+<h2 style="color:palevioletred">目前頁數：@Model.PagingInfo.CurrentPage</h2>
+<br />
+<input type="button" class="btn btn-info" value="末三碼查詢" onclick="inputNumber()" />
+
+<form method="get" asp-action=GetECByEndThreeYard enctype="multipart/form-data">
+    <table class="table">
+        @Html.HiddenFor(model => model.ECList.First().StoreNo)
+        @{
+            var store = Model.ECList.First().StoreNo;
+            var sort = Model.PagingInfo.eCSort;
+        }
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ECList.First().EcLayer)
+                </th>
+                <th>
+                    <a asp-action="GetAll" asp-controller="SECChk" asp-route-storeno="@store" asp-route-sort="@ECSort.Name">@Html.DisplayNameFor(model => model.ECList.First().Name)</a>
+                </th>
+                <th>
+                    <a asp-action="GetAll" asp-controller="SECChk" asp-route-storeno="@store" asp-route-sort="@ECSort.CompanyName">@Html.DisplayNameFor(model => model.ECList.First().CompanyName)</a>
+
+                </th>
+                <th>
+                   @Html.DisplayNameFor(model => model.ECList.First().InDate)
+
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ECList.First().Price)
+                </th>
+                <th>
+                    <a asp-action="GetAll" asp-controller="SECChk" asp-route-storeno="@store" asp-route-sort="@ECSort.State">@Html.DisplayNameFor(model => model.ECList.First().State)</a>
+                </th>
+                <th>
+                    <a asp-action="GetAll" asp-controller="SECChk" asp-route-storeno="@store" asp-route-sort="@ECSort.NewNumber">@Html.DisplayNameFor(model => model.ECList.First().NewNumber)</a>
+                </th>
+                <th>
+                    <a asp-action="GetAll" asp-controller="SECChk" asp-route-storeno="@store" asp-route-sort="@ECSort.EndThreeYard">@Html.DisplayNameFor(model => model.ECList.First().EndThreeYard)</a>
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ECList)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EcLayer)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CompanyName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.State)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NewNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndThreeYard)
+                    </td>
+                   
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+    <!--顯示頁數-->
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            @for (int i = 1; i <= Model.PagingInfo.TotalPage; i++)
+            {
+                <li class="page-item">
+                    <a class="page-link"
+                       id="page+@i"
+                       asp-action="GetAll"
+                       asp-controller="SECChk"
+                       asp-route-page="@i"
+                       asp-route-storeno="@store"
+                       asp-route-sort="@sort">@i</a>
+                </li>
+            }
+
+        </ul>
+    </nav>
+
+</form>
+@section Scripts{
+    <script>
+        function inputNumber() {
+            var storeno=@Model.ECList.First().StoreNo;
+            var word = prompt("請輸入末三碼");
+            if (word.length > 3 || word.length < 3) {
+                alert("請輸入三碼");
+                inputNumber();
+            }
+            else {
+                location.href = "/SECChk/GetECByEndThreeYard?storeno=" + storeno+"&endthreeyard=" + word;
+            }
+        }
+    </script>
+}

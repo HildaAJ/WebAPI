@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ECChkAPI</name>
+    </assembly>
+    <members>
+        <member name="M:ECChkAPI.Controllers.SECChkController.GetFromEndThreeYard(ECChkAPI.Models.Parameter.StoreAndThree)">
+            <summary>
+            使用末三碼查詢EC資料,以進貨日期排序顯示
+            </summary>
+            <param name="param">店號,末三碼</param>
+            <returns></returns>
+        </member>
+        <member name="T:ECChkAPI.Models.ECSort">
+             <summary>
+            0：收貨人姓名
+            1：廠商名稱
+            2：進貨日期
+            3：狀態
+            4：末三碼
+             </summary>
+        </member>
+        <member name="M:ECChkAPI.Repository.AWSRedisDb.GetCacheByStoreno``1(System.String)">
+            <summary>
+            從redis中取得對應店號的EC資料
+            </summary>
+            <typeparam name="T">IFECCUTF</typeparam>
+            <param name="storeno">店號</param>
+            <returns></returns>
+        </member>
+        <member name="M:ECChkAPI.Repository.AWSRedisDb.SetCacheByStoreNo(System.String,System.String)">
+            <summary>
+            將EC資料寫入redis,key為店號,value為json格式再序列化後的EC資料
+            </summary>
+            <param name="storeKey">店號</param>
+            <param name="value">EC資料</param>
+            <returns></returns>
+        </member>
+        <member name="M:ECChkAPI.Repository.AWSRedisDb.DeleteKey(System.String)">
+            <summary>
+            刪除指定key
+            </summary>
+            <param name="storeKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ECChkAPI.Repository.ECChkRepository.GetECDataAsync(System.String)">
+            <summary>
+            根據店號取得EC資料
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ECChkAPI.Repository.ECChkRepository.GetECDataAsync(System.String,System.String)">
+            <summary>
+            根據店號及末三碼取得EC資料
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ECChkAPI.Repository.ECChkRepository.UpdateEC(ECChkAPI.Models.IFECCUTF)">
+            <summary>
+            更新門市EC資料,將redis的該門市value清空
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ECChkAPI.Repository.ECChkRepository.DeleteECRedis(System.String)">
+            <summary>
+            清空Redis門市資料
+            </summary>
+            <param name="StoreNo">店號</param>
+            <returns></returns>
+        </member>
+        <member name="M:ECChkAPI.Service.CultureStringComparer.Compare(System.String,System.String)">
+            <summary>
+            比較
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ECChkAPI.Service.ECService.SortECData(System.Collections.Generic.List{ECChkAPI.Models.IFECCUTFDto},ECChkAPI.Models.ECSort)">
+            <summary>
+            指定排序取得欲顯示的EC資料
+            </summary>
+            <param name="dtos">顯示於畫面的EC資料</param>
+            <param name="sort">指定排序值</param>
+            <returns>排序後的資料</returns>
+        </member>
+        <member name="M:ECChkAPI.Service.ECService.ChangeName(System.Collections.Generic.List{ECChkAPI.Models.IFECCUTFDto})">
+            <summary>
+            將溫層及狀態換成中文字顯示
+            </summary>
+            <param name="SortData">目前頁面的EC資料</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
